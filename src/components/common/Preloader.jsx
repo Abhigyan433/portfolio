@@ -1,149 +1,96 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect, useState } from 'react';
 
-const WRITE_DURATION = 2.0; // seconds for the ink-draw reveal of first name
+const letterVariants = {
+  initial: { y: '100%', opacity: 0 },
+  animate: (i) => ({
+    y: '0%',
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 350,
+      damping: 22,
+      delay: i * 0.05 + 0.2, // staggered entrance
+    },
+  }),
+  exit: (i) => ({
+    y: '-120%',
+    opacity: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 350,
+      damping: 22,
+      delay: i * 0.03, // staggered exit
+    },
+  }),
+};
 
 export function Preloader({ onComplete }) {
-  const [phase, setPhase] = useState('writing'); // 'writing' | 'done' | 'exit'
-  const [fontReady, setFontReady] = useState(false);
-
-  // Wait for Great Vibes to load before starting the clip animation
-  useEffect(() => {
-    document.fonts.ready.then(() => setFontReady(true));
-  }, []);
+  const [phase, setPhase] = useState('loading'); // 'loading' | 'exit'
+  const text = "PORTFOLIO";
 
   useEffect(() => {
-    if (!fontReady) return;
-    const t1 = setTimeout(() => setPhase('done'), WRITE_DURATION * 1000 + 300);
-    const t2 = setTimeout(() => setPhase('exit'), WRITE_DURATION * 1000 + 1200);
-    const t3 = setTimeout(() => onComplete(),     WRITE_DURATION * 1000 + 1900);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
-  }, [fontReady, onComplete]);
-
-  const ease = [0.25, 0.46, 0.45, 0.94];
+    // Stay loading for 2.2 seconds to let the slot machine fully render, then switch to exit
+    const t1 = setTimeout(() => setPhase('exit'), 2200);
+    // Unmount completely from App after exit animation completes
+    const t2 = setTimeout(() => onComplete(), 3000);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [onComplete]);
 
   return (
     <AnimatePresence>
       {phase !== 'exit' && (
         <motion.div
           key="preloader"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.65, ease: [0.76, 0, 0.24, 1] }}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={{
+            initial: { opacity: 1 },
+            animate: { opacity: 1 },
+            // Delay backdrop fade out by 0.5s to let the letters run their 'exit' animations first
+            exit: { opacity: 0, transition: { duration: 0.6, delay: 0.5, ease: [0.76, 0, 0.24, 1] } },
+          }}
           className="fixed inset-0 z-[1000] bg-background flex flex-col items-center justify-center overflow-hidden"
         >
-
-          {/* ── Corner frame lines ── */}
-          {['top-8 left-8', 'top-8 right-8', 'bottom-8 left-8', 'bottom-8 right-8'].map((pos, i) => {
-            const isRight  = pos.includes('right');
-            const isBottom = pos.includes('bottom');
-            return (
-              <motion.div key={i} className={`absolute ${pos}`}>
-                <motion.div
-                  initial={{ scaleX: 0, opacity: 0 }}
-                  animate={phase === 'done' ? { scaleX: 1, opacity: 0.2 } : {}}
-                  transition={{ delay: i * 0.06, duration: 0.4, ease }}
-                  style={{ transformOrigin: isRight ? 'right' : 'left' }}
-                  className="w-7 h-px bg-primary-muted"
-                />
-                <motion.div
-                  initial={{ scaleY: 0, opacity: 0 }}
-                  animate={phase === 'done' ? { scaleY: 1, opacity: 0.2 } : {}}
-                  transition={{ delay: i * 0.06 + 0.05, duration: 0.4, ease }}
-                  style={{ transformOrigin: isBottom ? 'bottom' : 'top' }}
-                  className="w-px h-7 bg-primary-muted"
-                />
-              </motion.div>
-            );
-          })}
-
-          {/* ── Main name block ── */}
-          <div className="relative flex flex-col items-center gap-0">
-
-            {/* ── "Abhigyan" — cursive signature style, ink-draw reveal ── */}
-            <div className="relative">
-              {fontReady ? (
-                <motion.div
-                  initial={{ clipPath: 'inset(0 100% 0 0)' }}
-                  animate={{ clipPath: 'inset(0 0% 0 0)' }}
-                  transition={{ duration: WRITE_DURATION, ease }}
-                  className="font-signature text-primary select-none whitespace-nowrap"
-                  style={{ fontSize: 'clamp(4rem, 13vw, 10rem)', lineHeight: 1.2 }}
-                >
-                  Abhigyan
-                </motion.div>
-              ) : (
-                <div
-                  className="font-signature text-transparent select-none whitespace-nowrap"
-                  style={{ fontSize: 'clamp(4rem, 13vw, 10rem)', lineHeight: 1.2 }}
-                >
-                  Abhigyan
-                </div>
-              )}
-
-              {/* Ink cursor dot — moves with the writing tip */}
-              {phase === 'writing' && fontReady && (
-                <motion.div
-                  initial={{ left: '2%', opacity: 1 }}
-                  animate={{ left: '100%', opacity: 0 }}
-                  transition={{ duration: WRITE_DURATION, ease }}
-                  className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_3px_var(--primary)]"
-                  style={{ position: 'absolute' }}
-                />
-              )}
-            </div>
-
-            {/* ── Divider line that draws AFTER "Abhigyan" finishes ── */}
-            <motion.div
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 0.15 }}
-              transition={{ delay: WRITE_DURATION, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              style={{ transformOrigin: 'left', width: '100%' }}
-              className="h-px bg-primary"
-            />
-
-            {/* ── "DAS" — bold Anton display font, slides up after signature ── */}
-            <div className="overflow-hidden">
-              <motion.div
-                initial={{ y: '100%', opacity: 0 }}
-                animate={{ y: '0%', opacity: 1 }}
-                transition={{
-                  delay: WRITE_DURATION + 0.1,
-                  duration: 0.55,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="font-display uppercase text-primary-muted tracking-[0.5em] select-none"
-                style={{ fontSize: 'clamp(1rem, 3.5vw, 2.2rem)', paddingLeft: '0.5em' }}
+          {/* Main Slot Machine Text */}
+          <div className="overflow-hidden flex items-center justify-center px-4 w-full h-[20vw] sm:h-[15vw]">
+            {text.split('').map((char, i) => (
+              <motion.span
+                key={i}
+                custom={i}
+                variants={letterVariants}
+                className="font-display text-[15vw] sm:text-[12vw] leading-[0.85] tracking-[-0.02em] uppercase text-primary inline-block rainbow-text"
               >
-                DAS
-              </motion.div>
-            </div>
-
-            {/* ── Shimmer sweep when done ── */}
-            {phase === 'done' && (
-              <motion.div
-                initial={{ x: '-115%' }}
-                animate={{ x: '115%' }}
-                transition={{ duration: 0.65, ease: 'easeInOut' }}
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    'linear-gradient(105deg, transparent 30%, rgba(128,128,128,0.25) 50%, transparent 70%)',
-                }}
-              />
-            )}
+                {char}
+              </motion.span>
+            ))}
           </div>
 
-          {/* ── Bottom label ── */}
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 0.3, y: 0 }}
-            transition={{ delay: WRITE_DURATION + 0.25, duration: 0.7 }}
-            className="absolute bottom-10 text-[0.62rem] tracking-[0.45em] uppercase text-primary-muted font-sans"
-          >
-            Portfolio &nbsp;·&nbsp; Developer
-          </motion.p>
+          {/* Underline separator */}
+          <motion.div
+            variants={{
+              initial: { scaleX: 0 },
+              animate: { scaleX: 1, transition: { duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] } },
+              exit: { scaleX: 0, transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] } },
+            }}
+            className="h-[2px] mt-6 origin-center rainbow-line w-[80vw] sm:w-[50vw] max-w-sm"
+          />
 
+          {/* Subtitle */}
+          <motion.p
+            variants={{
+              initial: { opacity: 0, y: 10 },
+              animate: { opacity: 0.4, y: 0, transition: { duration: 0.6, delay: 0.8 } },
+              exit: { opacity: 0, y: -10, transition: { duration: 0.4 } },
+            }}
+            className="absolute bottom-12 text-[0.65rem] tracking-[0.4em] uppercase text-primary-muted font-sans"
+          >
+            Loading Experience
+          </motion.p>
         </motion.div>
       )}
     </AnimatePresence>

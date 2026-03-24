@@ -57,11 +57,8 @@ function App() {
         <About />
         {/* <Journey /> */}
         <Projects />
-        
-        <div className="max-w-6xl mx-auto px-6 space-y-16">
-          <TechStack />
-          <Experience />
-        </div>
+        <TechStack />
+        <Experience />
 
         <Certificates />
       </main>

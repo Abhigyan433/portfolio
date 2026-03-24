@@ -82,7 +82,7 @@ export function Certificates() {
         </motion.div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
 
         {/* ── Heading — unified with rest of site ── */}
         <div className="mb-16">
