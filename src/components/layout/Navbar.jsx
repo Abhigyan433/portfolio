@@ -126,7 +126,7 @@ export function Navbar() {
                 {/* Preview */}
                 <div className="flex-1 overflow-auto p-1">
                   <iframe
-                    src="/finalabhigyancvfull.docx"
+                    src="/ABHIGYANDAS.pdf#toolbar=0"
                     className="w-full h-[60vh] rounded-lg border-0"
                     title="Resume Preview"
                   />
@@ -135,7 +135,7 @@ export function Navbar() {
                 {/* Download */}
                 <div className="px-6 py-4 border-t border-border">
                   <motion.a
-                    href="/finalabhigyancvfull.docx"
+                    href="/ABHIGYANDAS.pdf"
                     download
                     whileHover={{ scale: 1.03, y: -1 }}
                     whileTap={{ scale: 0.97 }}

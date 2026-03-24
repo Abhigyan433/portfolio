@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { portfolioData } from '../../data/portfolioData';
+import { SectionHeader } from '../ui/SectionHeader';
 
 /* ── Credential Card with rainbow mesh ── */
 function CredentialCard({ cert, index }) {
@@ -83,36 +84,9 @@ export function Certificates() {
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
-        {/* ── Heading with letter-by-letter reveal ── */}
+        {/* ── Heading — unified with rest of site ── */}
         <div className="mb-16">
-          <div className="flex flex-wrap">
-            {heading.split('').map((char, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, y: 40, rotateX: -90 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.5,
-                  delay: i * 0.04,
-                  type: 'spring',
-                  stiffness: 200,
-                  damping: 15,
-                }}
-                className="font-display text-5xl md:text-8xl uppercase tracking-tight text-primary inline-block"
-                style={{ transformOrigin: 'bottom' }}
-              >
-                {char}
-              </motion.span>
-            ))}
-          </div>
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="h-[2px] mt-4 origin-left rainbow-line"
-          />
+          <SectionHeader title="Credentials" />
         </div>
 
         {/* ── Cards Grid (2 columns for bigger cards) ── */}
