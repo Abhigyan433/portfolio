@@ -23,20 +23,17 @@ export function Footer() {
   return (
     <footer ref={sectionRef} id="contact" className="relative bg-background overflow-hidden">
 
-      {/* ─── Rainbow Divider Line ─── */}
-      <div className="w-full h-[2px] rainbow-line" />
-
       {/* ─── MASSIVE TYPOGRAPHY ─── */}
       <div className="w-full px-4 pt-28 pb-8 overflow-hidden">
         <motion.h2
           style={{ y: bigTextY, opacity: bigTextOpacity, scale: bigTextScale }}
-          className="font-display text-[18vw] md:text-[15vw] uppercase leading-[0.85] tracking-tighter text-center whitespace-nowrap select-none pointer-events-none rainbow-text"
+          className="font-display text-[18vw] md:text-[15vw] uppercase leading-[0.85] tracking-tighter text-primary/[0.06] text-center whitespace-nowrap select-none pointer-events-none"
         >
           Let's Talk
         </motion.h2>
       </div>
 
-      {/* ─── CONTACT CONTENT ─── */}
+      {/* ─── CONTACT CONTENT (full width) ─── */}
       <div className="w-full px-6 md:px-16 lg:px-24 pb-10">
 
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-16 lg:gap-24 mb-20">
@@ -51,7 +48,6 @@ export function Footer() {
             <h3 className="font-display text-5xl md:text-7xl uppercase tracking-tight text-primary mb-6 leading-[0.9]">
               Get in<br />Touch
             </h3>
-            <div className="h-[2px] w-20 rainbow-line mb-8" />
             <p className="text-primary-muted text-sm leading-relaxed mb-10 max-w-md">
               Open for new opportunities, freelance projects, and interesting conversations. Don't hesitate to reach out.
             </p>
@@ -85,13 +81,9 @@ export function Footer() {
                   rel={s.ext ? "noreferrer" : undefined}
                   whileHover={{ y: -4, scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="relative w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 text-primary-muted hover:text-primary overflow-hidden group"
+                  className="w-11 h-11 border border-border hover:bg-primary hover:text-background hover:border-primary rounded-xl flex items-center justify-center transition-all duration-300 text-primary-muted"
                 >
-                  {/* Rainbow border on hover */}
-                  <div className="absolute inset-0 rounded-xl border border-border group-hover:border-transparent transition-colors duration-300" />
-                  <div className="absolute -inset-[1px] rounded-xl rainbow-border-glow opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute inset-[1px] rounded-[10px] bg-background z-[1]" />
-                  <span className="relative z-[2]">{s.icon}</span>
+                  {s.icon}
                 </motion.a>
               ))}
             </div>
@@ -107,51 +99,36 @@ export function Footer() {
           >
             <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-2 gap-3">
-                <div className="relative group">
-                  <input
-                    type="text"
-                    placeholder="Name"
-                    className="w-full bg-transparent border-b border-border px-1 py-3 text-sm text-primary placeholder:text-primary-muted/30 focus:outline-none transition-all"
-                  />
-                  <div className="absolute bottom-0 left-0 w-full h-[2px] rainbow-line origin-left scale-x-0 group-focus-within:scale-x-100 transition-transform duration-500" />
-                </div>
-                <div className="relative group">
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    className="w-full bg-transparent border-b border-border px-1 py-3 text-sm text-primary placeholder:text-primary-muted/30 focus:outline-none transition-all"
-                  />
-                  <div className="absolute bottom-0 left-0 w-full h-[2px] rainbow-line origin-left scale-x-0 group-focus-within:scale-x-100 transition-transform duration-500" />
-                </div>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  className="w-full bg-transparent border-b border-border px-1 py-3 text-sm text-primary placeholder:text-primary-muted/30 focus:outline-none focus:border-primary/50 transition-all"
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="w-full bg-transparent border-b border-border px-1 py-3 text-sm text-primary placeholder:text-primary-muted/30 focus:outline-none focus:border-primary/50 transition-all"
+                />
               </div>
-              <div className="relative group">
-                <textarea
-                  rows="4"
-                  placeholder="Your message..."
-                  className="w-full bg-transparent border-b border-border px-1 py-3 text-sm text-primary placeholder:text-primary-muted/30 focus:outline-none transition-all resize-none"
-                ></textarea>
-                <div className="absolute bottom-0 left-0 w-full h-[2px] rainbow-line origin-left scale-x-0 group-focus-within:scale-x-100 transition-transform duration-500" />
-              </div>
-              
-              {/* Rainbow-bordered submit button */}
-              <div className="relative inline-flex mt-2 group">
-                <div className="absolute -inset-[1px] rounded-xl rainbow-border-glow opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="relative flex items-center gap-2 px-8 py-3 bg-background rounded-xl text-xs font-bold uppercase tracking-widest text-primary transition-all z-[1]"
-                >
-                  <Send size={13} /> Send Message
-                </motion.button>
-              </div>
+              <textarea
+                rows="4"
+                placeholder="Your message..."
+                className="w-full bg-transparent border-b border-border px-1 py-3 text-sm text-primary placeholder:text-primary-muted/30 focus:outline-none focus:border-primary/50 transition-all resize-none"
+              ></textarea>
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                className="flex items-center gap-2 px-8 py-3 bg-primary text-background rounded-lg text-xs font-bold uppercase tracking-widest transition-all mt-2"
+              >
+                <Send size={13} /> Send Message
+              </motion.button>
             </form>
           </motion.div>
         </div>
 
         {/* ─── Bottom bar ─── */}
-        <div className="h-[1px] rainbow-line mb-6" />
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-primary-muted">
+        <div className="pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-primary-muted">
           <p>&copy; {new Date().getFullYear()} {name}. All rights reserved.</p>
           <motion.button
             onClick={scrollToTop}

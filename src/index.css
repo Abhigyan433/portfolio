@@ -106,17 +106,23 @@ html.light {
   );
 }
 
-/* Animated rainbow text */
+/* Animated mesh-wave text — subtle, not disco */
 .rainbow-text {
   background: linear-gradient(
     90deg,
-    #ff6b6b, #ffa94d, #ffd43b, #69db7c, #38d9a9, #4dabf7, #748ffc, #da77f2, #ff6b6b
+    var(--primary) 0%,
+    #b8a9d4 15%,
+    var(--primary) 30%,
+    #8fb8c9 50%,
+    var(--primary) 65%,
+    #c4a882 80%,
+    var(--primary) 100%
   );
-  background-size: 300% 100%;
+  background-size: 400% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: rainbow-shift 6s ease-in-out infinite;
+  animation: rainbow-shift 12s ease-in-out infinite;
 }
 
 /* Animated rainbow line / underline */

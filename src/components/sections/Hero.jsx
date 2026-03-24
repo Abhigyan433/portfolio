@@ -57,6 +57,11 @@ export function Hero() {
         style={{ opacity: textOpacity, scale: textScale }}
         className="w-full px-4 text-center z-0 relative flex items-center justify-center overflow-hidden h-[18vw] sm:h-[15vw]"
       >
+        {/* Progressive blur — top edge */}
+        <div className="absolute top-0 left-0 right-0 h-[30%] z-10 pointer-events-none" style={{ backdropFilter: 'blur(3px)', maskImage: 'linear-gradient(to bottom, black, transparent)' }} />
+        {/* Progressive blur — bottom edge */}
+        <div className="absolute bottom-0 left-0 right-0 h-[30%] z-10 pointer-events-none" style={{ backdropFilter: 'blur(3px)', maskImage: 'linear-gradient(to top, black, transparent)' }} />
+
         <AnimatePresence mode="wait">
           <motion.h1
             key={textIndex}
