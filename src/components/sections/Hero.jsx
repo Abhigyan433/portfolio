@@ -3,11 +3,10 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { portfolioData } from '../../data/portfolioData';
 
 const letterVariants = {
-  initial: { y: '100%', opacity: 0, filter: 'blur(8px)' },
+  initial: { y: '100%', opacity: 0 },
   animate: (i) => ({
     y: '0%',
     opacity: 1,
-    filter: 'blur(0px)',
     transition: {
       type: 'spring',
       stiffness: 350,
@@ -18,7 +17,6 @@ const letterVariants = {
   exit: (i) => ({
     y: '-120%',
     opacity: 0,
-    filter: 'blur(8px)',
     transition: {
       type: 'spring',
       stiffness: 350,

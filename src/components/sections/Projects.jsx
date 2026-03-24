@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ExternalLink, Github, X, Calendar, Wrench, ArrowRight, ArrowLeft, BarChart, Database, Brain, Search, Chrome, Bot } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
+import { SectionHeader } from '../ui/SectionHeader';
 
 const getTagIcon = (tag) => {
   const devicons = {
@@ -37,15 +38,7 @@ export function Projects() {
     <section id="projects" className="pt-32 pb-20 w-full">
       {/* Header */}
       <div className="max-w-6xl mx-auto px-6 md:px-12 mb-12">
-        <motion.h2
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-6xl font-display uppercase tracking-tight text-primary"
-        >
-          Projects
-        </motion.h2>
+        <SectionHeader title="Projects" />
       </div>
 
       {/* Full-width horizontal scroll row */}

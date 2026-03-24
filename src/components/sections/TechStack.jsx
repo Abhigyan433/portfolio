@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { motion } from 'motion/react';
+import { SectionHeader } from '../ui/SectionHeader';
 
 const techIcons = [
   { name: 'JavaScript', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
@@ -47,15 +48,7 @@ export function TechStack() {
   return (
     <section className="py-16 w-full overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 md:px-12 mb-10">
-        <motion.h2
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-6xl font-display uppercase tracking-tight text-primary"
-        >
-          Stack
-        </motion.h2>
+        <SectionHeader title="Stack" />
       </div>
 
       <div className="relative w-full">
