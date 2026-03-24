@@ -77,3 +77,77 @@ html.light {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+/* ── Unified Rainbow Gradient System ── */
+@keyframes rainbow-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes rainbow-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes jFloat1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(40px, -30px); }
+}
+
+@keyframes jFloat2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-30px, 40px); }
+}
+
+.rainbow-gradient {
+  --rainbow: linear-gradient(
+    90deg,
+    #ff6b6b, #ffa94d, #ffd43b, #69db7c, #38d9a9, #4dabf7, #748ffc, #da77f2, #ff6b6b
+  );
+}
+
+/* Animated rainbow text */
+.rainbow-text {
+  background: linear-gradient(
+    90deg,
+    #ff6b6b, #ffa94d, #ffd43b, #69db7c, #38d9a9, #4dabf7, #748ffc, #da77f2, #ff6b6b
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow-shift 6s ease-in-out infinite;
+}
+
+/* Animated rainbow line / underline */
+.rainbow-line {
+  background: linear-gradient(
+    90deg,
+    #ff6b6b, #ffa94d, #ffd43b, #69db7c, #38d9a9, #4dabf7, #748ffc, #da77f2, #ff6b6b
+  );
+  background-size: 300% 100%;
+  animation: rainbow-shift 4s ease-in-out infinite;
+}
+
+/* Animated rainbow border glow */
+.rainbow-border-glow {
+  background: conic-gradient(
+    from 0deg,
+    #ff6b6b, #ffa94d, #ffd43b, #69db7c, #38d9a9, #4dabf7, #748ffc, #da77f2, #ff6b6b
+  );
+  animation: rainbow-spin 4s linear infinite;
+}
+
+/* Rainbow mesh bg for cards */
+.rainbow-mesh-bg {
+  background: linear-gradient(
+    135deg,
+    rgba(255,107,107,0.08),
+    rgba(255,169,77,0.06),
+    rgba(105,219,124,0.06),
+    rgba(77,171,247,0.08),
+    rgba(218,119,242,0.07)
+  );
+  background-size: 400% 400%;
+  animation: rainbow-shift 8s ease-in-out infinite;
+}

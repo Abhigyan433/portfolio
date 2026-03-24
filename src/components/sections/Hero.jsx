@@ -62,7 +62,7 @@ export function Hero() {
         <AnimatePresence mode="wait">
           <motion.h1
             key={textIndex}
-            className="font-display text-[15vw] leading-[0.85] tracking-[-0.02em] uppercase text-primary whitespace-nowrap flex"
+            className="font-display text-[15vw] leading-[0.85] tracking-[-0.02em] uppercase whitespace-nowrap flex rainbow-text"
             initial="initial"
             animate="animate"
             exit="exit"

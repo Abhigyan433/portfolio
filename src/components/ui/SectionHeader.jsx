@@ -12,6 +12,13 @@ export function SectionHeader({ title }) {
       >
         {title}
       </motion.h2>
+      <motion.div
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="h-[2px] mt-3 origin-left rainbow-line max-w-[120px]"
+      />
     </div>
   );
 }

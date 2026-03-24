@@ -55,7 +55,7 @@ function App() {
       <main className={`transition-all duration-700 ${isLoading ? 'opacity-0 scale-95 blur-xl' : 'opacity-100 scale-100 blur-0'} w-full`}>
         <Hero />
         <About />
-        <Journey />
+        {/* <Journey /> */}
         <Projects />
         
         <div className="max-w-6xl mx-auto px-6 space-y-16">

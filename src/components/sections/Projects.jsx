@@ -145,7 +145,7 @@ export function Projects() {
                   <span className="relative inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-primary pb-1 group-hover:text-primary-muted transition-colors duration-300">
                     View Details 
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                    <span className="absolute left-0 bottom-0 w-full h-[1.5px] bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+                    <span className="absolute left-0 bottom-0 w-full h-[2px] rainbow-line origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
                   </span>
                 </div>
               </div>
