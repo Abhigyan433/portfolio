@@ -27,9 +27,13 @@ export function About() {
             <h3 className="text-2xl md:text-3xl font-display uppercase tracking-tight text-primary mb-6 relative z-10">
               Who I Am
             </h3>
-            <p className="text-primary-muted text-sm md:text-base leading-relaxed max-w-xl relative z-10">
-              {aboutParagraphs[0]}
-            </p>
+            <div className="space-y-4 relative z-10">
+              {aboutParagraphs.map((para, i) => (
+                <p key={i} className="text-primary-muted text-sm md:text-base leading-relaxed max-w-xl">
+                  {para}
+                </p>
+              ))}
+            </div>
           </motion.div>
 
           {/* ── Location Card ── */}
