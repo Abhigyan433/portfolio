@@ -8,6 +8,7 @@ import { createPortal } from 'react-dom';
 const navLinks = [
   { name: 'About', href: '#about' },
   { name: 'Projects', href: '#projects' },
+  { name: 'Stack', href: '#stack' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -20,7 +21,7 @@ export function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-      const sections = ['about', 'projects', 'contact'];
+      const sections = ['about', 'projects', 'stack', 'contact'];
       for (const id of [...sections].reverse()) {
         const el = document.getElementById(id);
         if (el && window.scrollY >= el.offsetTop - 200) {

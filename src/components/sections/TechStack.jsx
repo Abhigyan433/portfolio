@@ -46,7 +46,7 @@ export function TechStack() {
   }, [mouseX]);
 
   return (
-    <section className="py-16 w-full overflow-hidden">
+    <section id="stack" className="py-16 w-full overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 md:px-12 mb-10">
         <SectionHeader title="Stack" />
       </div>
