@@ -8,9 +8,8 @@ export const portfolioData = {
     github: 'https://github.com/Abhigyan433',
     location: 'India',
     aboutParagraphs: [
-      "Software developer and data enthusiast crafting modern web architectures, analytics dashboards, and ML-powered tools. Currently pursuing B.Tech in Computer Science at Lovely Professional University.",
-      "I specialize in building intelligent applications that bridge the gap between complex data and intuitive user experiences. My expertise spans full-stack development, machine learning pipelines, and advanced data visualization.",
-      "Beyond code, I am passionate about solving real-world challenges through technology—whether it's detecting media bias using NLP, predicting data trends, or designing premium, responsive user interfaces."
+      "Software developer and data enthusiast crafting modern web architectures, analytics dashboards, and ML-powered tools. Currently pursuing my B.Tech in Computer Science at Lovely Professional University.",
+      "I specialize in building intelligent applications that bridge complex data with intuitive user experiences. Beyond code, I'm passionate about solving real-world challenges—from machine learning pipelines to premium, responsive UI design."
     ],
     stats: [
       { value: '100+', label: 'Coding Problems Solved' },
